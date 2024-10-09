@@ -29,9 +29,15 @@ app.post('/', (req, res) => {
 
         response.on('end', () => {
             const weatherData = JSON.parse(data);
-            res.json(weatherData); // Send JSON data to the client
+            const humidity = weatherData.main.humidity; // Extract humidity
+            res.json({ ...weatherData, humidity }); // Include humidity in the response
         });
     });
+});
+
+// Handle 404 - Page Not Found
+app.use((req, res) => {
+    res.status(404).sendFile(__dirname + '/404.html');
 });
 
 app.listen(3000, () => {
