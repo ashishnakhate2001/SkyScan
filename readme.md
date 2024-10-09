@@ -67,7 +67,7 @@ SkyScan is a simple weather application built using Node.js and Express. It fetc
 
 ## API Key
 
-The application uses the OpenWeatherMap API to fetch weather data. You need to replace the placeholder API key in `app.js` with your own API key from OpenWeatherMap.
+The application uses the OpenWeatherMap API to fetch weather data. You need to replace the placeholder API key in `app.js` with your own API key from OpenWeatherMap. You can obtain an API key by signing up at [OpenWeatherMap API Keys](https://home.openweathermap.org/api_keys).
 
 ## License
 
