@@ -29,9 +29,16 @@ app.post('/', (req, res) => {
 
         response.on('end', () => {
             const weatherData = JSON.parse(data);
-            const humidity = weatherData.main.humidity; // Extract humidity
-            res.json({ ...weatherData, humidity }); // Include humidity in the response
+            if (weatherData.cod !== 200) {
+                // If the city is not found or another error occurs
+                res.json({ error: "City not found. Please enter a valid city name." });
+            } else {
+                const humidity = weatherData.main.humidity; // Extract humidity
+                res.json({ ...weatherData, humidity }); // Include humidity in the response
+            }
         });
+    }).on('error', (e) => {
+        res.json({ error: "An error occurred while fetching the weather data." });
     });
 });
 

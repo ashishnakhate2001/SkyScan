@@ -97,18 +97,22 @@
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     const weatherData = JSON.parse(xhr.responseText);
-                    const temp = weatherData.main.temp;
-                    const weatherDescription = weatherData.weather[0].description;
-                    const icon = weatherData.weather[0].icon;
-                    const iconUrl = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
-                    const humidity = weatherData.humidity; // Get humidity
+                    if (weatherData.error) {
+                        document.getElementById('weatherResult').innerHTML = `<p class="error">${weatherData.error}</p>`;
+                    } else {
+                        const temp = weatherData.main.temp;
+                        const weatherDescription = weatherData.weather[0].description;
+                        const icon = weatherData.weather[0].icon;
+                        const iconUrl = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
+                        const humidity = weatherData.humidity; // Get humidity
 
-                    document.getElementById('weatherResult').innerHTML = `
-                        <p>The weather is currently ${weatherDescription}.</p>
-                        <h1>The temperature in ${cityName} is ${temp} degrees Celsius and the weather is ${weatherDescription}.</h1>
-                        <p>Humidity: ${humidity}%</p> <!-- Display humidity -->
-                        <img src="${iconUrl}" alt="Weather icon" class="weather-icon">
-                    `;
+                        document.getElementById('weatherResult').innerHTML = `
+                            <p>The weather is currently ${weatherDescription}.</p>
+                            <h1>The temperature in ${cityName} is ${temp} degrees Celsius and the weather is ${weatherDescription}.</h1>
+                            <p>Humidity: ${humidity}%</p> <!-- Display humidity -->
+                            <img src="${iconUrl}" alt="Weather icon" class="weather-icon">
+                        `;
+                    }
                 }
             };
 
